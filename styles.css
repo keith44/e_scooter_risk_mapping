@@ -1,0 +1,80 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f7f7f7;
+}
+
+header {
+  padding: 14px 20px;
+  background: #1f2937;
+  color: white;
+}
+
+header h1  {
+  margin: 0;
+  font-size: 22px;
+}
+
+header p {
+  margin: 6px 0 0;
+  font-size: 14px;
+  color: #d1d5db;
+}
+
+#map, #crash-heatmap-container,#crash-timeseries-container{
+  width: 90%;
+  max-width: 900px;
+  height: 500px;
+  margin: 20px auto;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  
+}
+
+#map-container{
+ width: 90%;
+  max-width: 900px;
+  height: 700px;
+  margin: 20px auto;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+
+
+}
+
+
+
+ #crash-heatmap-container  {
+  border: 1px solid #ccc;
+   height: 400px;
+ }
+
+ #crash-heatmap-container ,#crash-timeseries-container{
+  border: 1px solid #ccc;
+   height: 500px;
+ }
+
+
+
+#legend {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 220px;
+  z-index: 1000;
+}
+
+#legend-gradient {
+  width: 100%;
+  height: 12px;
+  border-radius: 4px;
+  margin-bottom: 4px;
+}
+
+
+.heatmap-title,.timeseries-title {
+  margin: 12px 16px 0 16px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+}
