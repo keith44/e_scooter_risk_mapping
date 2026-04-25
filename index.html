@@ -13,8 +13,9 @@
 
 
     <link rel="stylesheet" href="styles.css" />
-    <script src="script.js" defer></script>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <!-- <script src="https://d3js.org/d3.v7.min.js"></script> -->
+    <script type="module" src="./script.js"></script>
+
 </head>
 
 <body>
@@ -23,20 +24,21 @@
         <p>Starter webpage with a map</p>
     </header>
 
-    <div class="container mt-3">
 
 
+    <div class="container-fluid p-2">
+        <div class="row align-items-stretch">
 
-        <div id="map-container">
-            <p class="heatmap-title">
 
-                Denver E-Scooter Map
-            </p>
-            <div class="row g-2 align-items-left justify-content-center">
+            <div class="col-md-3 d-flex">
+                <div class="card w-100 h-100">
 
-                <div class="col-auto">
-                    <label for="yearFilter" class="form-label mb-1">Year</label>
-                    <select id="yearFilter" class="form-select form-select-sm">
+
+                    <p class="title">Filters</p>
+
+
+                    <label for="yearFilter" class="form-label mt-3 mb-1 title">Year</label>
+                    <select id="yearFilter" class="form-select form-select-sm  w-75 mx-auto ">
                         <option value="all">All</option>
                         <option value="2020">2020</option>
                         <option value="2021">2021</option>
@@ -45,63 +47,187 @@
                         <option value="2024">2024</option>
 
                     </select>
-                </div>
 
-                <div class="col-auto">
-                    <label for="quarterFilter" class="form-label mb-1">Quarter</label>
-                    <select id="quarterFilter" class="form-select form-select-sm">
+
+
+                    <label for="quarterFilter" class="form-label mt-3 title">Quarter</label>
+                    <select id="quarterFilter" class="form-select form-select-sm  w-75 mx-auto">
                         <option value="all">All</option>
                         <option value="Q1">Q1</option>
                         <option value="Q2">Q2</option>
                         <option value="Q3">Q3</option>
                         <option value="Q4">Q4</option>
                     </select>
-                </div>
-            </div>
+                    <div class="sidebar-section-spacer">
 
-                <div id="visible-usage-total">
-
-                    asdfa
-                </div>
-
-            <div id="map">
-                <div id="legend" class="card p-2 shadow-sm">
-                    <div class="small fw-bold mb-1">Usage Count</div>
-
-                    <div id="legend-gradient"></div>
-
-                    <div class="d-flex justify-content-between small">
-                        <span id="legend-min"></span>
-                        <span id="legend-max"></span>
                     </div>
+
+                    <div class="card shadow-sm border-0 w-100" id="total-accidents-card">
+                        <div class="card-body d-flex align-items-center justify-content-between">
+
+
+                            <img src="scooter.svg" alt="Accidents" width="60" height="60" class="stat-icon me-3">
+
+
+                            <div class="text-center flex-grow-1">
+                                <h6 class="text-muted mb-1 stat-label">Total Accidents</h6>
+                                <h3 class="fw-bold mb-0 text-black stat-value" id="total-accidents-value">0</h3>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card shadow-sm border-0 w-100" id="total-injuries-card">
+                        <div class="card-body d-flex align-items-center justify-content-between">
+
+
+                            <img src="mobile-clinic-truck-icon.svg" alt="injuries" width="60" height="60" class="me-3">
+
+
+                            <div class="text-center flex-grow-1">
+                                <h6 class="text-muted mb-1 stat-label">Injuries</h6>
+                                <h3 class="fw-bold mb-0 text-black stat-value" id="total-injuries-value">0</h3>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card shadow-sm border-0 w-100" id="total-fatal-accidents-card">
+                        <div class="card-body d-flex align-items-center justify-content-between">
+
+
+                            <img src="exclamation-warning-triangle-icon.svg" alt="fatal accidents" width="60"
+                                height="60" class="me-3">
+
+
+                            <div class="text-center flex-grow-1">
+                                <h6 class="text-muted mb-1 stat-label">Fatalities</h6>
+                                <h3 class="fw-bold mb-0 text-black stat-value" id="total-fatal-accidents-value">0</h3>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="sidebar-section-spacer">
+
+                    </div>
+                    <div class="car w-100 h-10 ">
+                        <p class="title">
+                            Accidents and Accident Rate Over Time
+                        </p>
+                        <div id="crash-trip-ratio-barchart"></div>
+                    </div>
+                    <div class="sidebar-section-spacer"></div>
+
+
+                    <div class="px-3 pb-3 small text-muted">
+                        <strong>Data Sources</strong><br>
+
+                        Ride Report<br>
+                        <a href="https://public.ridereport.com" target="_blank">
+                            public.ridereport.com/denver
+                        </a><br><br>
+
+                        DRCOG Regional Data Catalog<br>
+                        <a href="https://data.drcog.org" target="_blank">
+                            data.drcog.org
+                        </a><br>
+
+                        Licensed under
+                        <a href="https://creativecommons.org/licenses/by/4.0/deed.en" target="_blank">
+                            CC BY 4.0
+                        </a><br><br>
+
+                        <em>
+                            Contains data from the DRCOG Regional Data Catalog.
+                            You are free to copy, distribute, transmit, and adapt the data
+                            with proper attribution.
+                        </em>
+                    </div>
+
                 </div>
+
+
             </div>
-        </div>
+
+
+            <div class="col-md-9 d-flex flex-column gap-1">
+                <div class="card flex-fill" id="map-container">
+                    <p class="title">E-Scooter Usage and Accident Map</p>
+                    <div id="map">
+
+                        <div id="map-controls" class="card shadow-sm border-0">
+                            <div class="card-body py-2 px-3">
+
+                                <div class="small fw-bold mb-2">Layers</div>
+
+                                <label class="form-label small mb-1">Crashes</label>
+                                <select id="crashFilter" class="form-select form-select-sm mb-2">
+                                    <option value="false">Off</option>
+                                    <option value="true">On</option>
+                                </select>
+
+                                <label class="form-label small mb-1">Usage</label>
+                                <select id="usageFilter" class="form-select form-select-sm">
+                                    <option value="true">On</option>
+                                    <option value="false">Off</option>
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div id="risk-value" class="card shadow-sm border-0">
+                            <div class="card-body py-2 px-3 text-center">
+                                <div class="large text-muted">Visible Area Risk</div>
+
+                                <div id="relative-risk-value" class="fw-bold fs-4 text-dark">
+                                    1.00
+                                </div>
+
+                                <div id="relative-risk-label" class="small text-muted">
+                                    1.00 = average
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div id="legend" class="card p-2 shadow-sm">
+                            <div class="small fw-bold mb-1">Usage Count</div>
+
+                            <div id="legend-gradient"></div>
+
+                            <div class="d-flex justify-content-between small">
+                                <span id="legend-min"></span>
+                                <span id="legend-max"></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="card flex-fill">
+                    <p class="title">Accidents by Day of Week and Hour</p>
+                    <div id="crash-heatmap">
 
 
 
 
+                    </div>
+                    <div id="day-of-week-trips" class="mt-3">
+                        <p class="title">Accident Rate by Day of Week</p>
+                        <div id="day-of-week-trips-barchart"></div>
+                    </div>
+
+                </div>
+
+            </div>
 
 
 
-
-
-        <select id="selectButton"></select>
-        <div id="crash-heatmap-container">
-
-            <p class="heatmap-title">
-
-                Frequency of Crashes by Day of Week
-            </p>
-            <div id="crash-heatmap"></div>
-        </div>
-
-        <div id="crash-timeseries-container">
-            <p class="timeseries-title">
-                Number of Crashes over time </p>
-            <div id="crash-timeseries"></div>
         </div>
     </div>
+
+
 
 
 </body>

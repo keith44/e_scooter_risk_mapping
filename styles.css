@@ -6,11 +6,11 @@ body {
 
 header {
   padding: 14px 20px;
-  background: #1f2937;
+  background: #033e8cb3;
   color: white;
 }
 
-header h1  {
+header h1 {
   margin: 0;
   font-size: 22px;
 }
@@ -21,39 +21,42 @@ header p {
   color: #d1d5db;
 }
 
-#map, #crash-heatmap-container,#crash-timeseries-container{
-  width: 90%;
-  max-width: 900px;
+#map {
+  position: relative;
   height: 500px;
-  margin: 20px auto;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  
-}
-
-#map-container{
- width: 90%;
-  max-width: 900px;
-  height: 700px;
-  margin: 20px auto;
+  margin: 12px;
   border: 1px solid #ccc;
   border-radius: 8px;
 
+}
 
+#map {
+  position: relative;
+}
+
+#risk-value {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 1000;
+
+  width: auto;
+  min-width: 150px;
+  max-width: 200px;
 }
 
 
-
- #crash-heatmap-container  {
+#crash-heatmap-container,
+#crash-trip-ratio-barchart-container {
   border: 1px solid #ccc;
-   height: 400px;
- }
+  height: 400px;
+}
 
- #crash-heatmap-container ,#crash-timeseries-container{
+#crash-heatmap-container,
+#crash-timeseries-container {
   border: 1px solid #ccc;
-   height: 500px;
- }
-
+  height: 400px;
+}
 
 
 #legend {
@@ -71,10 +74,97 @@ header p {
   margin-bottom: 4px;
 }
 
+.sidebar-section-spacer {
+  width: 90%;
+  align-self: center;
+  margin-top: 20px;
+  padding: 15px;
+  border-top: 1px solid #646262;
+}
 
-.heatmap-title,.timeseries-title {
-  margin: 12px 16px 0 16px;
+.title {
+  margin: 12px 16px 0px 16px;
   font-size: 16px;
   font-weight: 600;
   color: #111827;
+
+}
+
+.grid line {
+  stroke: #e9dcdc;
+  stroke-width: 1;
+  opacity: 0.6;
+}
+
+
+.sidebar-stats {
+
+  font-size: 30px;
+  text-align: center;
+
+}
+
+#total-accidents-card {
+  background: transparent;
+  mix-blend-mode: multiply;
+  background-color: rgb(2, 22, 255,.10);
+  border-radius: 0%;
+
+}
+
+#total-injuries-card {
+  background: transparent;
+  background-color: rgba(186, 8, 69, 0.10);
+  margin-top: 5px;
+  border-radius: 0%;
+
+}
+
+#total-fatal-accidents-card {
+  background: transparent;
+  background-color: rgba(252, 3,3, .10);
+  margin-top: 5px;
+  border-radius: 0%;
+}
+
+.stat-icon {
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.stat-label {
+  font-size: 1.8rem;
+  color: #6c757d;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1;
+
+}
+
+#relative-risk-value {
+
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000;
+
+
+}
+
+#map-controls {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 1000;
+  width: 150px;
+}
+
+#crash-heatmap svg,
+#day-of-week-trips-barchart svg {
+  display: block;
+}
+.sticky-top {
+  top: 10px;
 }
