@@ -2,7 +2,7 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
 
 
-export async function drawCrashHeatmap(filteredCrashOnlyData, range_start_col, range_end_col) {
+export async function drawAccidentHeatmap(filteredCrashOnlyData, range_start_col, range_end_col) {
 
     const container = d3.select("#map-container");
 
@@ -172,5 +172,5 @@ days.forEach(day => {
         .attr("y", legendX + legendWidth + 35)
         .attr("text-anchor", "middle")
         .style("font-size", "12px")
-        .text("Crashes");
+        .text("Accidents");
 }

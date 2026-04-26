@@ -168,3 +168,16 @@ header p {
 .sticky-top {
   top: 10px;
 }
+#weekday-legend {
+  position: absolute;
+  right: 15px;
+  top: 55px;
+  z-index: 10;
+  width: 95px;
+}
+
+#weekday-legend-gradient {
+  width: 12px;
+  height: 145px;
+  border-radius: 4px;
+}

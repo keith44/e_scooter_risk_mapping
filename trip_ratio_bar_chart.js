@@ -3,9 +3,9 @@ import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
 
 // Crash ration combo line and barchart
-export async function drawCrashTripRatioBarChart(crashTripData, range_start_col, range_end_col) {
+export async function accidentTripRatioBarChart(crashTripData, range_start_col, range_end_col) {
 
-   
+
     d3.select("#crash-trip-ratio-barchart").selectAll("*").remove();
 
     const container = d3.select("#crash-trip-ratio-barchart");
@@ -50,15 +50,15 @@ export async function drawCrashTripRatioBarChart(crashTripData, range_start_col,
 
     // crashTripData.slice(0,4).forEach(element => {
     //     console.log(element)
-        
+
     // });
 
     // c.slice(0,4).forEach(element => {
     //     console.log(element)
-         
+
     // });
 
-     const cty = d3.rollups(
+    const cty = d3.rollups(
         c,
         v => ({
             trips: d3.sum(v, d => d.trips),
@@ -67,35 +67,35 @@ export async function drawCrashTripRatioBarChart(crashTripData, range_start_col,
         d => d.year
     );
 
-    
+
     // cty.slice(0,4).forEach(element => {
     //     console.log(element)
-         
+
     // });
     //  crashTripsByYear.slice(0,4).forEach(element => {
     //     console.log(element)
-         
+
     // });
-    
-    
-    
-    
+
+
+
+
     const crashTripRatio = crashTripsByYear.map(([year, values]) => ({
         year: year,
         trips: values.trips,
         crashes: values.crashes,
-        ratio: (values.crashes / values.trips )*10000
+        ratio: (values.crashes / values.trips) * 10000
     }))
         .sort((a, b) => a.year - b.year);
 
-    
-    
-  
-    
-    
-    
-    
-        const x = d3.scaleBand()
+
+
+
+
+
+
+
+    const x = d3.scaleBand()
         .domain(crashTripRatio.map(d => d.year))
         .range([0, width])
         .padding(0.2);
@@ -146,7 +146,7 @@ export async function drawCrashTripRatioBarChart(crashTripData, range_start_col,
 
     chart.append("g")
         .attr("transform", `translate(${width}, 0)`)
-        .call(d3.axisRight(yLine).tickFormat(d => d.toFixed(2) + "%"));
+        .call(d3.axisRight(yLine).tickFormat(d => d.toFixed(2)));
 
     const line = d3.line()
         .x(d => x(d.year) + x.bandwidth() / 2)
@@ -176,7 +176,7 @@ export async function drawCrashTripRatioBarChart(crashTripData, range_start_col,
         .attr("x", -height / 2)
         .attr("y", width + margin.right)
         .attr("text-anchor", "middle")
-        .text("Accident-to-Trip Ratio");
+        .text("Accident Rate");
     chart.append("text")
         .attr("x", width / 2)
         .attr("y", height + margin.bottom - 5)

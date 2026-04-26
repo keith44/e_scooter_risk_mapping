@@ -1,13 +1,13 @@
 import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
-import { drawCrashHeatmap } from "./crash_heatmap.js"
-import { drawCrashTripRatioBarChart } from "./trip_ratio_bar_chart.js"
+import { drawAccidentHeatmap } from "./crash_heatmap.js"
+import { accidentTripRatioBarChart } from "./trip_ratio_bar_chart.js"
 import { loadMap } from "./map.js"
 import { statCards } from "./stat_cards.js"
 import { dayOfWeekTrips } from "./trips_by_day_of_week.js"
 
 import { getFileName, calcCurrentMapViewUsageTotal, scaleLineWeight, countVisibleMarkers, calcRelativeRisk } from "./helper_functions.js"
 
-
+ 
 let crashTripData;
 let year;
 let quarter;
@@ -76,7 +76,7 @@ async function init() {
             geojsonLayer,
             markersLayer
         ));
-        drawCrashHeatmap(filteredCrashOnlyData, range_start_col, range_end_col);
+        drawAccidentHeatmap(filteredCrashOnlyData, range_start_col, range_end_col);
         statCards(filteredCrashOnlyData)
         relativeRisk = calcRelativeRisk(map, filteredCrashOnlyData, mapUsageData);
         dayOfWeekTrips(filteredTripOnlyData, range_start_col, range_end_col)
@@ -208,9 +208,9 @@ async function init() {
     });
 
     window.addEventListener("resize", async () => {
-        drawCrashTripRatioBarChart(crashTripData, range_start_col, range_end_col);
+        accidentTripRatioBarChart(crashTripData, range_start_col, range_end_col);
 
-        drawCrashHeatmap(filteredCrashOnlyData, range_start_col, range_end_col);
+        drawAccidentHeatmap(filteredCrashOnlyData, range_start_col, range_end_col);
 
         dayOfWeekTrips(filteredTripOnlyData, range_start_col, range_end_col)
 
@@ -223,9 +223,9 @@ async function init() {
     map.fitBounds(geojsonLayer.getBounds());
 
 
-    drawCrashTripRatioBarChart(crashTripData, range_start_col, range_end_col);
+    accidentTripRatioBarChart(crashTripData, range_start_col, range_end_col);
 
-    drawCrashHeatmap(filteredCrashOnlyData, range_start_col, range_end_col);
+    drawAccidentHeatmap(filteredCrashOnlyData, range_start_col, range_end_col);
 
 
     dayOfWeekTrips(filteredTripOnlyData, range_start_col, range_end_col)
