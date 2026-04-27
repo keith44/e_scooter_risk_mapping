@@ -39,12 +39,31 @@ const hours = d3.range(24).map(h => `${h}:00`);
 
  
 
+ 
+
+
+const periods = new Set(
+    filteredCrashOnlyData.map(d => `${d.year}-${d.quarter}`)
+);
+
+const shouldAverage =
+    yearFilter.value === "all" || quarterFilter.value === "all";
+
+const divisor = shouldAverage ? periods.size : 1;
+
 const crashCounts = d3.rollups(
     filteredCrashOnlyData,
-    v => v.length,
+    v => v.length / divisor,
     d => d.day_of_week,
     d => `${+d.hour}:00`
 );
+
+
+
+
+
+
+
 
  
 
@@ -172,5 +191,5 @@ days.forEach(day => {
         .attr("y", legendX + legendWidth + 35)
         .attr("text-anchor", "middle")
         .style("font-size", "12px")
-        .text("Accidents");
+        .text("Average Accident Count");
 }
